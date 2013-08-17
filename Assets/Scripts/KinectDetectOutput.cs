@@ -11,8 +11,8 @@ public class KinectDetectOutput : MonoBehaviour
     /// 第一個場景使用
     /// </summary>
     public enum GestureType { Up, Mid, Dowm };
-    public GestureType RightHandGestureType;
-    public GestureType LeftHandGestureType;
+    public static GestureType RightHandGestureType;
+    public static GestureType LeftHandGestureType;
     /// 提供給"兩隻手，分別的高度判斷"
     // Type1
     // 左手在上 右手在下
@@ -35,7 +35,7 @@ public class KinectDetectOutput : MonoBehaviour
     public static Vector3 RightHandPosition;
     public static Vector3 LeftHandPosition;
     //使否手左右晃動
-    public bool isRocking;
+    public static bool isRocking;
 
     // Use this for initialization
     void Start()

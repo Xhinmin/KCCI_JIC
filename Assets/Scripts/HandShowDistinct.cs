@@ -23,6 +23,7 @@ public class HandShowDistinct : MonoBehaviour
     void Start()
     {
         this.OrginalLocalPosition = this.transform.localPosition;
+       
     }
 
     // Update is called once per frame
