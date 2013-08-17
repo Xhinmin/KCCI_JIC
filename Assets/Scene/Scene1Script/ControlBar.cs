@@ -24,13 +24,13 @@ public class ControlBar : MonoBehaviour {
         if (Input.GetKey("z"))
         {
 
-            RotateBridge01.transform.eulerAngles = new Vector3(0, 0, 33);  
+            RotateBridge01.transform.eulerAngles = new Vector3(0, 0, 35);  
             
         }
         if (Input.GetKey("w"))
         {
 
-            RotateBridge02.transform.eulerAngles = new Vector3(0, 0, 33);  
+            RotateBridge02.transform.eulerAngles = new Vector3(0, 0, 35);  
             
         }
         if (Input.GetKey("s"))
