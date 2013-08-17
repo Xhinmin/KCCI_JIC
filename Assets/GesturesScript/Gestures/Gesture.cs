@@ -96,7 +96,7 @@
                 }
                 else
                 {//動作結束
-                    Debug.Log("動作結束");
+                    //Debug.Log("動作結束");
                     this.Reset();
                     /*
                     if (this.GestureRecognised != null)

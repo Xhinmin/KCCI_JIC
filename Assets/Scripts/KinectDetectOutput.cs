@@ -7,14 +7,12 @@ public class KinectDetectOutput : MonoBehaviour
     // Speical Requirement : 需要以一個中心點
     public SkeletonInformation skeletonInformation;
 
-    public Vector3 RightHandPosition;
-    public Vector3 LeftHandPosition;
-
+    /// <summary>
+    /// 第一個場景使用
+    /// </summary>
     public enum GestureType { Up, Mid, Dowm };
     public GestureType RightHandGestureType;
     public GestureType LeftHandGestureType;
-
-
     /// 提供給"兩隻手，分別的高度判斷"
     // Type1
     // 左手在上 右手在下
@@ -25,9 +23,20 @@ public class KinectDetectOutput : MonoBehaviour
     // Type3
     // 左手在下 右手在上
     public bool GestureTypeThree;
-
-
+    //手勢距離偏移量
     public float offset;
+
+
+    ///////////////////////////////////////////////
+
+    /// <summary>
+    /// 第二個場景使用     
+    /// </summary>
+    public static Vector3 RightHandPosition;
+    public static Vector3 LeftHandPosition;
+    //使否手左右晃動
+    public bool isRocking;
+
     // Use this for initialization
     void Start()
     {
@@ -41,6 +50,7 @@ public class KinectDetectOutput : MonoBehaviour
         LeftHandPosition = skeletonInformation.HandLeftPos - skeletonInformation.ShoulderCenterPos;
 
         HandGestureDetect();
+        HandisRockingDetect();
     }
 
     void GetDatumPoint(float Time)
@@ -49,7 +59,7 @@ public class KinectDetectOutput : MonoBehaviour
     }
 
     /// <summary>
-    /// 手掌姿勢偵測
+    /// 手掌姿勢偵測【第一場景】
     /// </summary>
     void HandGestureDetect()
     {
@@ -76,9 +86,21 @@ public class KinectDetectOutput : MonoBehaviour
                 LeftHandGestureType = GestureType.Dowm;
         }
 
-
+        //備用
         if (LeftHandGestureType == GestureType.Dowm && RightHandGestureType == GestureType.Up)
             GestureTypeOne = true;
 
     }
+
+
+    void HandisRockingDetect()
+    {
+        if (SkeletonInformation.skeletonWrapper.boneVel[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight].x > 0.1F ||
+            SkeletonInformation.skeletonWrapper.boneVel[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].x > 0.1F)
+            isRocking = true;
+        else
+            isRocking = false;
+    }
+
+
 }
