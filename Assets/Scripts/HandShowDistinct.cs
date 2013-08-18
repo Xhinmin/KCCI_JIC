@@ -45,13 +45,13 @@ public class HandShowDistinct : MonoBehaviour
         //Raycast hit
         if (Physics.Raycast(transform.position, new Vector3(0, 0, 1), out hit, 10, this.TargetLayer) == true)
         {
-            //if (KinectDetectOutput.isRocking)
-            //{
-            PictureColorController script = this.hit.collider.transform.parent.GetComponent<PictureColorController>();
-            script.DecPictureAlpha();
-            script.isStartRecove = false;
-            script.addValue = script.UndetectTime;
-            //}
+            if (KinectDetectOutput.isRocking)
+            {
+                PictureColorController script = this.hit.collider.transform.parent.GetComponent<PictureColorController>();
+                script.DecPictureAlpha();
+                script.isStartRecove = false;
+                script.addValue = script.UndetectTime;
+            }
         }
     }
 
