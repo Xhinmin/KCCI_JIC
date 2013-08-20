@@ -26,7 +26,10 @@ public class KinectDetectOutput : MonoBehaviour
     //手勢距離偏移量
     public float offset;
 
-
+    //右肩膀 與 右手掌 的Y差植
+    public static float RightHand_RightShouder_Offset;
+    //左肩膀 與 左手掌 的Y差植
+    public static float LeftHand_LeftShouder_Offset;
     ///////////////////////////////////////////////
 
     /// <summary>
@@ -85,6 +88,11 @@ public class KinectDetectOutput : MonoBehaviour
             if (skeletonInformation.HandLeftPos.y < skeletonInformation.ShoulderCenterPos.y - offset*2)
                 LeftHandGestureType = GestureType.Dowm;
         }
+
+
+
+        LeftHand_LeftShouder_Offset = skeletonInformation.HandLeftPos.y - skeletonInformation.ShoulderLeftPos.y;
+        RightHand_RightShouder_Offset = skeletonInformation.HandRightPos.y - skeletonInformation.ShoulderRightPos.y;
 
         //備用
         if (LeftHandGestureType == GestureType.Dowm && RightHandGestureType == GestureType.Up)
