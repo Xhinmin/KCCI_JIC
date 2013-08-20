@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ControlBar : MonoBehaviour {
     public GameObject RotateBridge01, RotateBridge02;
-
+    public int RBridgeStatus, LBridgeStatus;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,35 +14,36 @@ public class ControlBar : MonoBehaviour {
 
         if (Input.GetKey("q") || KinectDetectOutput.LeftHandGestureType == KinectDetectOutput.GestureType.Up)
         {
-
-            RotateBridge01.transform.eulerAngles = new Vector3 (0, 0, -33);            
+            LBridgeStatus = 1;
+            RotateBridge01.transform.eulerAngles = new Vector3 (0, 0, -30);            
         }
         if (Input.GetKey("a") || KinectDetectOutput.LeftHandGestureType == KinectDetectOutput.GestureType.Mid)
         {
+            LBridgeStatus = 2;
             RotateBridge01.transform.eulerAngles = new Vector3(0, 0, 0);
         }
         if (Input.GetKey("z") || KinectDetectOutput.LeftHandGestureType == KinectDetectOutput.GestureType.Dowm)
         {
-
-            RotateBridge01.transform.eulerAngles = new Vector3(0, 0, 35);  
+            LBridgeStatus = 3;
+            RotateBridge01.transform.eulerAngles = new Vector3(0, 0, 30);  
             
         }
         if (Input.GetKey("w") || KinectDetectOutput.RightHandGestureType == KinectDetectOutput.GestureType.Up)
         {
-
-            RotateBridge02.transform.eulerAngles = new Vector3(0, 0, 35);  
+            RBridgeStatus = 1;
+            RotateBridge02.transform.eulerAngles = new Vector3(0, 0, 30);  
             
         }
         if (Input.GetKey("s") || KinectDetectOutput.RightHandGestureType == KinectDetectOutput.GestureType.Mid)
         {
-
+            RBridgeStatus = 2;
             RotateBridge02.transform.eulerAngles = new Vector3(0, 0, 0);  
             
         }
         if (Input.GetKey("x") || KinectDetectOutput.RightHandGestureType == KinectDetectOutput.GestureType.Dowm)
         {
-
-            RotateBridge02.transform.eulerAngles = new Vector3(0, 0, -33);  
+            RBridgeStatus = 3;
+            RotateBridge02.transform.eulerAngles = new Vector3(0, 0, -30);  
             
         }
 	}

@@ -59,8 +59,9 @@ public class WordTest : MonoBehaviour
 
     void WordCC()
     {
-        print(WordOneC + " " + WordTwoC + " " + WordThreeC);
-   
+        print(WordOneC + " " + WordTwoC + " " + WordThreeC + "\n");
+        print("Ecount"+ EWordOneC + " " + EWordTwoC + " " + EWordThreeC + "\n");
+        print(CorrectCount);
         int j = Random.Range(0, 3);
        
             Instantiate(G_WordPlane, G_WordEntrance[j].transform.position, G_WordPlane.transform.rotation);
