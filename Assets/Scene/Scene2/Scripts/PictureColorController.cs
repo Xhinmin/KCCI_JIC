@@ -14,18 +14,18 @@ public class PictureColorController : MonoBehaviour
 
     private bool isChangeFinish;
     private int currentIndex = 0;   //目前圖片的index
-    private float updateValue;
 
-    public float UndetectTime;
+    [HideInInspector]
+    public bool isStartRecover;     //開始進行回復圖案
+    public float UndetectTime;      //沒有手的動作多久後開始回復(秒)
+    [HideInInspector]
     public float addValue;
 
-    public bool isStartRecove;
-
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         this.isChangeFinish = true;
-        this.isStartRecove = false;
+        this.isStartRecover = false;
         this.addValue = this.UndetectTime;
     }
 
@@ -35,7 +35,18 @@ public class PictureColorController : MonoBehaviour
     /// <param name="value">變化值</param>
     void ColorChangeUpdate(float value)
     {
-        this.SpriteList[this.currentIndex].SetColor(new Color(1, 1, 1, value));
+        //當前圖片進行Alpha修正，他的下一張Alpha值則為補數
+        for (int i = 0; i < this.SpriteList.Count; i++)
+        {
+            if (i == this.currentIndex)
+                this.SpriteList[i].SetColor(new Color(1, 1, 1, value));
+
+            else if (i == this.currentIndex + 1)
+                this.SpriteList[i].SetColor(new Color(1, 1, 1, 1 - value));
+
+            else
+                this.SpriteList[i].SetColor(new Color(1, 1, 1, 0));
+        }
     }
 
     /// <summary>
@@ -43,19 +54,22 @@ public class PictureColorController : MonoBehaviour
     /// </summary>
     void ColorChangeComplete()
     {
+        //修改狀態
         this.isChangeFinish = true;
     }
 
     /// <summary>
     /// 減少圖片Alpha值
     /// </summary>
-    public void DecPictureAlpha()
+    public void DecreasePictureAlpha()
     {
         if (this.isChangeFinish)
         {
+            //當前Alpha小於0，則開始切換下一張圖
             if (this.SpriteList[this.currentIndex].color.a <= 0)
             {
                 this.currentIndex++;
+                //如果已經是最下面的圖，則不進行圖片修正
                 if (this.currentIndex >= this.SpriteList.Count - 1)
                 {
                     this.currentIndex = this.SpriteList.Count - 2;
@@ -70,7 +84,6 @@ public class PictureColorController : MonoBehaviour
                         "to", this.SpriteList[this.currentIndex].color.a - this.ChangeDeltaScale,
                         "time", this.CountDownTime,
                         "onupdate", "ColorChangeUpdate",
-                        "onupdateparams", this.updateValue,
                         "oncomplete", "ColorChangeComplete"
                         ));
                 }
@@ -84,7 +97,6 @@ public class PictureColorController : MonoBehaviour
                     "to", this.SpriteList[this.currentIndex].color.a - this.ChangeDeltaScale,
                     "time", this.CountDownTime,
                     "onupdate", "ColorChangeUpdate",
-                    "onupdateparams", this.updateValue,
                     "oncomplete", "ColorChangeComplete"
                     ));
             }
@@ -94,13 +106,15 @@ public class PictureColorController : MonoBehaviour
     /// <summary>
     /// 增加圖片Alpha值
     /// </summary>
-    public void AddPictureAlpha()
+    public void IncreasePictureAlpha()
     {
         if (this.isChangeFinish)
         {
+            //當前Alpha大於1，則開始切換下一張圖
             if (this.SpriteList[this.currentIndex].color.a >= 1)
             {
                 this.currentIndex--;
+                //如果已經是最上面的圖，則不進行圖片修正
                 if (this.currentIndex < 0)
                 {
                     this.currentIndex = 0;
@@ -115,7 +129,6 @@ public class PictureColorController : MonoBehaviour
                         "to", this.SpriteList[this.currentIndex].color.a + this.ChangeDeltaScale,
                         "time", this.CountDownTime,
                         "onupdate", "ColorChangeUpdate",
-                        "onupdateparams", this.updateValue,
                         "oncomplete", "ColorChangeComplete"
                         ));
                 }
@@ -129,7 +142,6 @@ public class PictureColorController : MonoBehaviour
                     "to", this.SpriteList[this.currentIndex].color.a + this.ChangeDeltaScale,
                     "time", this.CountDownTime,
                     "onupdate", "ColorChangeUpdate",
-                    "onupdateparams", this.updateValue,
                     "oncomplete", "ColorChangeComplete"
                     ));
             }
@@ -142,29 +154,29 @@ public class PictureColorController : MonoBehaviour
         //Alpha減少
         if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
-            DecPictureAlpha();
+            DecreasePictureAlpha();
         }
 
         //Alpha增加
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
-            AddPictureAlpha();
+            IncreasePictureAlpha();
         }
 
-        if (!this.isStartRecove)
+        if (!this.isStartRecover)
         {
             this.addValue -= Time.deltaTime;
             if (this.addValue <= 0)
             {
                 this.addValue = this.UndetectTime;
-                this.isStartRecove = true;
+                this.isStartRecover = true;
             }
         }
         else
         {
-            this.AddPictureAlpha();
+            this.IncreasePictureAlpha();
         }
 
-        //print("Current Picture Name：" + this.SpriteList[this.currentIndex].name + " ,Current Alpha = " + this.SpriteList[this.currentIndex].color.a);
+        print("Current Picture Name：" + this.SpriteList[this.currentIndex].name + " ,Current Alpha = " + this.SpriteList[this.currentIndex].color.a);
     }
 }

@@ -47,9 +47,10 @@ public class HandShowDistinct : MonoBehaviour
         {
             if (KinectDetectOutput.isRocking)
             {
+                //修正被觸摸到的圖形
                 PictureColorController script = this.hit.collider.transform.parent.GetComponent<PictureColorController>();
-                script.DecPictureAlpha();
-                script.isStartRecove = false;
+                script.DecreasePictureAlpha();
+                script.isStartRecover = false;
                 script.addValue = script.UndetectTime;
             }
         }
