@@ -3,7 +3,7 @@ using System.Collections;
 
 public class testWordObj : MonoBehaviour
 {
-    int wordHeadNum;
+    public int wordHeadNum;
     public GameObject WordCreat001;
     private WordTest WTest;
     // Use this for initialization
@@ -87,28 +87,6 @@ public class testWordObj : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        
-        if (other.gameObject.name == "Exit01" || other.gameObject.name == "Exit02" || other.gameObject.name == "Exit03")
-        {
-            print("gggg");
-            if (wordHeadNum == other.GetComponent<ExitNumber>().ExitNum)
-            {
-                if (wordHeadNum == WTest.WordOne)
-                    WTest.EWordOneC++;
-                if (wordHeadNum == WTest.WordTwo)
-                    WTest.EWordTwoC++;
-                if (wordHeadNum == WTest.WordThree)
-                    WTest.EWordThreeC++;
-
-                WTest.CorrectCount++;
-           
-            }
-          
-        }
-     
-    }
 
 
 

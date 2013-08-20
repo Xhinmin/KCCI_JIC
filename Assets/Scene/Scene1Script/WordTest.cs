@@ -15,15 +15,15 @@ public class WordTest : MonoBehaviour
     public int WordOneC, WordTwoC, WordThreeC;  //計算目前該部首顯示到第幾張圖
     public int EWordOneC, EWordTwoC, EWordThreeC;  //計算目前該部首有幾張圖離開遊戲
     public int CorrectCount;                    //計算答對次數
+    public int WrongCount;                      //計算答錯次數
 
- 
 
     public List<int> saveList = new List<int>();
 
     // Use this for initialization
     void Start()
     {
-
+        WrongCount = 0;
         CorrectCount = 0;
         WordOneC = 0;
         WordTwoC = 0;
@@ -59,20 +59,19 @@ public class WordTest : MonoBehaviour
 
     void WordCC()
     {
-        print(WordOneC + " " + WordTwoC + " " + WordThreeC + "\n");
-        print("Ecount"+ EWordOneC + " " + EWordTwoC + " " + EWordThreeC + "\n");
+        print("Ecount" + EWordOneC + " " + EWordTwoC + " " + EWordThreeC + "\n");
         print(CorrectCount);
         int j = Random.Range(0, 3);
-       
-            Instantiate(G_WordPlane, G_WordEntrance[j].transform.position, G_WordPlane.transform.rotation);
+
+        Instantiate(G_WordPlane, G_WordEntrance[j].transform.position, G_WordPlane.transform.rotation);
 
     }
     // Update is called once per frame
     void Update()
     {
         if (WordOneC + WordTwoC + WordThreeC >= 30)
-        {
-            GameObject.Find("TimeCount").GetComponent<TimeTest>().AllWord = true;
+        {          
+          
         }
         else
         {
@@ -80,25 +79,25 @@ public class WordTest : MonoBehaviour
             {
                 if (!IsInvoking("WordCC"))
                 {
-                    Invoke("WordCC", 3);
+                    Invoke("WordCC", 2.4f);
                 }
             }
             else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 20)
             {
                 if (!IsInvoking("WordCC"))
                 {
-                    Invoke("WordCC", 2);
+                    Invoke("WordCC", 1.8f);
                 }
             }
             else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 0)
             {
                 if (!IsInvoking("WordCC"))
                 {
-                    Invoke("WordCC", 1);
+                    Invoke("WordCC", 1.2f);
                 }
             }
 
         }
-        
+
     }
 }

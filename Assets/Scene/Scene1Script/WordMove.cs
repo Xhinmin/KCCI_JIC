@@ -3,20 +3,50 @@ using System.Collections;
 
 public class WordMove : MonoBehaviour
 {
-    public int wordStatus;
+    public int wordStatus;              //目前字版跑到哪個道路的狀態值
+    public int WordExitStatus;          //當字版撞到出口後，是否是正確的出口的確認值
 
     public GameObject ControlBridge;
     private ControlBar controlbar01;
+
+    public GameObject WordCreat002;
+    private WordTest WTest002;
+
+    public testWordObj testWordChild;
     // Use this for initialization
     void Start()
     {
         wordStatus = 0;
+
+        WordCreat002 = GameObject.Find("WordCreat");
+        WTest002 = WordCreat002.GetComponent<WordTest>();
+
         ControlBridge = GameObject.Find("控制橋");
         controlbar01 = ControlBridge.GetComponent<ControlBar>();
+
+        testWordChild = this.gameObject.GetComponentInChildren<testWordObj>();
     }
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.name == "Exit01" || other.gameObject.name == "Exit02" || other.gameObject.name == "Exit03")
+        {
+            if (testWordChild.wordHeadNum == other.GetComponent<ExitNumber>().ExitNum)
+            {
+                if (testWordChild.wordHeadNum == WTest002.WordOne)
+                    WTest002.EWordOneC++;
+                if (testWordChild.wordHeadNum == WTest002.WordTwo)
+                    WTest002.EWordTwoC++;
+                if (testWordChild.wordHeadNum == WTest002.WordThree)
+                    WTest002.EWordThreeC++;
+                WordExitStatus = 1;
+                WTest002.CorrectCount++;
+            }
+            else {
+                WordExitStatus = 2;
+                WTest002.WrongCount++;
+            }
+        }
 
 
         if (other.gameObject.name == "BlueTriggerRight" && wordStatus == 2)
