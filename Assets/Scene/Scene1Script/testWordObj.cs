@@ -8,7 +8,7 @@ public class testWordObj : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+
         int i = Random.Range(0, 3);
         if (i == 0)
         {
@@ -127,6 +127,6 @@ public class testWordObj : MonoBehaviour
         if (wordStatus == 1)
             this.transform.Translate(-20 * Time.deltaTime, 0, 0);
         else if (wordStatus == 0)
-            this.transform.Translate(-20 * Time.deltaTime, -50 * Time.deltaTime, 0);
+            this.transform.Translate(-20 * Time.deltaTime, -50 * Time.deltaTime, 30 * Time.deltaTime);
     }
 }
