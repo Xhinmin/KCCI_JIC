@@ -8,12 +8,20 @@ public class KinectDetectOutput : MonoBehaviour
     public SkeletonInformation skeletonInformation;
 
     /// <summary>
+    /// 所有場景共用
+    /// </summary>
+    
+    //偵測是否有抓到玩家
+    public static bool SkeletonIsEnable;
+
+    /// <summary>
     /// 第一個場景使用
     /// </summary>
     public enum GestureType { Up, Mid, Dowm };
     public static GestureType RightHandGestureType;
     public static GestureType LeftHandGestureType;
-    /// 提供給"兩隻手，分別的高度判斷"
+
+    // 提供給"兩隻手，分別的高度判斷"
     // Type1
     // 左手在上 右手在下
     public bool GestureTypeOne;
@@ -35,7 +43,10 @@ public class KinectDetectOutput : MonoBehaviour
     /// <summary>
     /// 第二個場景使用     
     /// </summary>
+    
+    //右手 與 肩膀中間的 向量誤差值
     public static Vector3 RightHandPosition;
+    //左手 與 肩膀中間的 向量誤差值
     public static Vector3 LeftHandPosition;
     //使否手左右晃動
     public static bool isRocking;
@@ -49,6 +60,15 @@ public class KinectDetectOutput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //偵測骨架部分 第一個玩家
+        if (GameObject.Find("Kinect_Prefab").GetComponent<SkeletonWrapper>().trackedPlayers[0] == -1)
+        {
+            SkeletonIsEnable = false;
+        }
+        else
+            SkeletonIsEnable = true;
+
+
         RightHandPosition = skeletonInformation.HandRightPos - skeletonInformation.ShoulderCenterPos;
         LeftHandPosition = skeletonInformation.HandLeftPos - skeletonInformation.ShoulderCenterPos;
 
@@ -56,10 +76,6 @@ public class KinectDetectOutput : MonoBehaviour
         HandisRockingDetect();
     }
 
-    void GetDatumPoint(float Time)
-    {
-
-    }
 
     /// <summary>
     /// 手掌姿勢偵測【第一場景】
@@ -101,6 +117,9 @@ public class KinectDetectOutput : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 手掌姿勢偵測【第二場景】
+    /// </summary>
     void HandisRockingDetect()
     {
         if (SkeletonInformation.skeletonWrapper.boneVel[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight].x > 0.1F ||
