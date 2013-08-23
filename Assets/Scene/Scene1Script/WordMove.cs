@@ -16,7 +16,7 @@ public class WordMove : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        wordStatus = 0;
+        wordStatus = 1;
 
         WordCreat002 = GameObject.Find("WordCreat");
         WTest002 = WordCreat002.GetComponent<WordTest>();
@@ -29,6 +29,9 @@ public class WordMove : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.name == "Exit00") {
+            WordExitStatus = 2;
+        }
         if (other.gameObject.name == "Exit01" || other.gameObject.name == "Exit02" || other.gameObject.name == "Exit03")
         {
             if (testWordChild.wordHeadNum == other.GetComponent<ExitNumber>().ExitNum)
@@ -62,11 +65,6 @@ public class WordMove : MonoBehaviour
             this.gameObject.transform.parent = GameObject.Find("B_LeftBridge").transform;
             this.gameObject.transform.localPosition = new Vector3(this.gameObject.transform.position.x, 6, 0);
            
-        }
-        else if (other.gameObject.name == "GreenTrigger" && wordStatus == 0)
-        {
-            this.gameObject.transform.parent = null;
-            wordStatus = 1;
         }
         else if ( other.gameObject.name == "RedTriggerTop" && wordStatus == 3
             || other.gameObject.name == "RedTriggerMid" && wordStatus == 3
@@ -108,49 +106,52 @@ public class WordMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (wordStatus == 1)
+        if (KinectDetectOutput.SkeletonIsEnable == true)
         {
-            this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-            this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 0);
-        }
-        else if (wordStatus == 2)
-        {
-            if (ControlBridge.GetComponent<ControlBar>().LBridgeStatus == 1)
-            {
-                this.gameObject.transform.eulerAngles = new Vector3(0, 0, -30);
-            }
-            if (ControlBridge.GetComponent<ControlBar>().LBridgeStatus == 2)
+            if (wordStatus == 1)
             {
                 this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+                this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 0);
             }
-            if (ControlBridge.GetComponent<ControlBar>().LBridgeStatus == 3)
+            else if (wordStatus == 2)
             {
-                this.gameObject.transform.eulerAngles = new Vector3(0, 0, 30);
+                if (ControlBridge.GetComponent<ControlBar>().LBridgeStatus == 1)
+                {
+                    this.gameObject.transform.eulerAngles = new Vector3(0, 0, -30);
+                }
+                if (ControlBridge.GetComponent<ControlBar>().LBridgeStatus == 2)
+                {
+                    this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+                }
+                if (ControlBridge.GetComponent<ControlBar>().LBridgeStatus == 3)
+                {
+                    this.gameObject.transform.eulerAngles = new Vector3(0, 0, 30);
+                }
+                this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 0);
             }
-            this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 0);
-        }
-        else if (wordStatus == 3)
-        {
-            if (ControlBridge.GetComponent<ControlBar>().RBridgeStatus == 1)
+            else if (wordStatus == 3)
             {
-                this.gameObject.transform.eulerAngles = new Vector3(0, 0, 30);
-            }
-            if (ControlBridge.GetComponent<ControlBar>().RBridgeStatus == 2)
-            {
-                this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-            }
-            if (ControlBridge.GetComponent<ControlBar>().RBridgeStatus == 3)
-            {
-                this.gameObject.transform.eulerAngles = new Vector3(0, 0, -30);
-            }
-            this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 0);
+                if (ControlBridge.GetComponent<ControlBar>().RBridgeStatus == 1)
+                {
+                    this.gameObject.transform.eulerAngles = new Vector3(0, 0, 30);
+                }
+                if (ControlBridge.GetComponent<ControlBar>().RBridgeStatus == 2)
+                {
+                    this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+                }
+                if (ControlBridge.GetComponent<ControlBar>().RBridgeStatus == 3)
+                {
+                    this.gameObject.transform.eulerAngles = new Vector3(0, 0, -30);
+                }
+                this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 0);
 
-        }
-        else if (wordStatus == 4)
-        {
-            this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 150 * Time.deltaTime);
-            this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x - 0.8f * Time.deltaTime,
-                this.gameObject.transform.localScale.y -0.8f * Time.deltaTime, this.gameObject.transform.localScale.z -0.8f * Time.deltaTime);
+            }
+            else if (wordStatus == 4)
+            {
+                this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 150 * Time.deltaTime);
+                this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x - 0.8f * Time.deltaTime,
+                    this.gameObject.transform.localScale.y - 0.8f * Time.deltaTime, this.gameObject.transform.localScale.z - 0.8f * Time.deltaTime);
+            }
         }
 
     }

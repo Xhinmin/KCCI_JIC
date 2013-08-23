@@ -69,35 +69,37 @@ public class WordTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (WordOneC + WordTwoC + WordThreeC >= 30)
-        {          
-          
-        }
-        else
+        if (KinectDetectOutput.SkeletonIsEnable == true)
         {
-            if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 40)
+            if (WordOneC + WordTwoC + WordThreeC >= 30)
             {
-                if (!IsInvoking("WordCC"))
-                {
-                    Invoke("WordCC", 2.4f);
-                }
-            }
-            else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 20)
-            {
-                if (!IsInvoking("WordCC"))
-                {
-                    Invoke("WordCC", 1.8f);
-                }
-            }
-            else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 0)
-            {
-                if (!IsInvoking("WordCC"))
-                {
-                    Invoke("WordCC", 1.2f);
-                }
-            }
 
+            }
+            else
+            {
+                if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 40)
+                {
+                    if (!IsInvoking("WordCC"))
+                    {
+                        Invoke("WordCC", 2.4f);
+                    }
+                }
+                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 20)
+                {
+                    if (!IsInvoking("WordCC"))
+                    {
+                        Invoke("WordCC", 1.8f);
+                    }
+                }
+                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 0)
+                {
+                    if (!IsInvoking("WordCC"))
+                    {
+                        Invoke("WordCC", 1.2f);
+                    }
+                }
+
+            }
         }
-
     }
 }

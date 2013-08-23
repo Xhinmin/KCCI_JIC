@@ -7,6 +7,8 @@ public class TimeTest : MonoBehaviour
     public SkeletonInformation Tskeletoninfomation;
 
     public bool intheGame;
+    public GameObject NoBodyDetect;
+    public float ReLoadGame;
 
     public float f_GameTime, AllWordTime;
     public GUIStyle StartCount, TimeCounter, EndGuiSC, EndGuiSW;
@@ -101,6 +103,11 @@ public class TimeTest : MonoBehaviour
    //     }
    //     else
    //     {
+        if (KinectDetectOutput.SkeletonIsEnable == true)
+        {
+            NoBodyDetect.SetActive(false);
+            intheGame = true;
+            ReLoadGame = 0;
             if (AllWord != true)
             {
 
@@ -113,6 +120,16 @@ public class TimeTest : MonoBehaviour
             }
             if (f_GameTime <= -13)
                 Application.LoadLevel("Scene1");
+        }
+        else if (KinectDetectOutput.SkeletonIsEnable == false && intheGame == true)
+        {
+            NoBodyDetect.SetActive(true);
+            ReLoadGame += Time.deltaTime;
+            if (ReLoadGame >= 10)
+                Application.LoadLevel("Scene1");
+        }
+        else if (KinectDetectOutput.SkeletonIsEnable == false)
+            NoBodyDetect.SetActive(true);
   //      }
     }
 }
