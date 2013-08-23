@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class TimeTest : MonoBehaviour
 {
+    public SkeletonInformation Tskeletoninfomation;
+
+    public bool intheGame;
 
     public float f_GameTime, AllWordTime;
     public GUIStyle StartCount, TimeCounter, EndGuiSC, EndGuiSW;
@@ -18,13 +21,15 @@ public class TimeTest : MonoBehaviour
     public GameObject G_WordCreat;
 
     public bool AllWord = false;
+
+    
     //  private List<int> saveList = new List<int>();
 
     // Use this for initialization
     void Start()
     {
         f_GameTime = 66;
-
+        intheGame = false;
     }
 
     void OnGUI()
@@ -91,18 +96,23 @@ public class TimeTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AllWord != true)
-        {
+   //     if (intheGame == false)
+    //    {
+   //     }
+   //     else
+   //     {
+            if (AllWord != true)
+            {
 
-            f_GameTime -= Time.deltaTime;
-        }
-        else
-        {
+                f_GameTime -= Time.deltaTime;
+            }
+            else
+            {
 
-            AllWordTime += Time.deltaTime;
-        }
-        if (f_GameTime <= -13)
-            Application.LoadLevel("Scene1");
-
+                AllWordTime += Time.deltaTime;
+            }
+            if (f_GameTime <= -13)
+                Application.LoadLevel("Scene1");
+  //      }
     }
 }

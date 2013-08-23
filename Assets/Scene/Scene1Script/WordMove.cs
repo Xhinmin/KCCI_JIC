@@ -53,7 +53,7 @@ public class WordMove : MonoBehaviour
         {
             wordStatus = 3;
             this.gameObject.transform.parent = GameObject.Find("B_RightBridge").transform;
-            this.gameObject.transform.localPosition = new Vector3(this.gameObject.transform.position.x, 6, 0);
+            this.gameObject.transform.localPosition = new Vector3(3.2f, 6, 0);
           
         }
         else if (other.gameObject.name == "BlueTriggerLeft" && wordStatus == 1)
@@ -148,7 +148,9 @@ public class WordMove : MonoBehaviour
         }
         else if (wordStatus == 4)
         {
-            this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 90 * Time.deltaTime);
+            this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 150 * Time.deltaTime);
+            this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x - 0.8f * Time.deltaTime,
+                this.gameObject.transform.localScale.y -0.8f * Time.deltaTime, this.gameObject.transform.localScale.z -0.8f * Time.deltaTime);
         }
 
     }
