@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 0820：藉由Kinect右手及左手的點　給予新對應的手位置
+/// 0824：
+/// </summary>
 public class HandShowDistinct : MonoBehaviour
 {
     public int X_Max;
@@ -9,8 +13,8 @@ public class HandShowDistinct : MonoBehaviour
     public int Y_Min;
 
     public SkeletonInformation skeletonInformation;
-    public int ratio; //影響倍率值
-
+    public int handRatio; //影響倍率值
+    public int hipRatio; //影響倍率值
     public HandType handType;
 
     public LayerMask TargetLayer;
@@ -30,15 +34,15 @@ public class HandShowDistinct : MonoBehaviour
         if (handType == HandType.Right)
         {
             this.transform.localPosition = this.OrginalLocalPosition + new Vector3(
-                Mathf.Clamp(KinectDetectOutput.RightHandPosition.x * ratio, X_Min, X_Max),
-                Mathf.Clamp(KinectDetectOutput.RightHandPosition.y * ratio, Y_Min, Y_Max),
+                Mathf.Clamp(KinectDetectOutput.RightHandPosition.x * handRatio + skeletonInformation.HipCenterPos.x * hipRatio, X_Min, X_Max),
+                Mathf.Clamp(KinectDetectOutput.RightHandPosition.y * handRatio + skeletonInformation.HipCenterPos.x * hipRatio, Y_Min, Y_Max),
                 0);
         }
         else
         {
             this.transform.localPosition = this.OrginalLocalPosition + new Vector3(
-                Mathf.Clamp(KinectDetectOutput.LeftHandPosition.x * ratio, X_Min, X_Max),
-                Mathf.Clamp(KinectDetectOutput.LeftHandPosition.y * ratio, Y_Min, Y_Max),
+                Mathf.Clamp(KinectDetectOutput.LeftHandPosition.x * handRatio + skeletonInformation.HipCenterPos.x * hipRatio, X_Min, X_Max),
+                Mathf.Clamp(KinectDetectOutput.LeftHandPosition.y * handRatio + skeletonInformation.HipCenterPos.x * hipRatio, Y_Min, Y_Max),
                 0);
         }
 
