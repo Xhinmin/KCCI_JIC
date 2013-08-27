@@ -16,18 +16,21 @@ public class WordTest : MonoBehaviour
     public int EWordOneC, EWordTwoC, EWordThreeC;  //計算目前該部首有幾張圖離開遊戲
     public int CorrectCount;                    //計算答對次數
     public int WrongCount;                      //計算答錯次數
-
+    public int wordSpeed;                       // 字的移動速度
+    bool firstword;
 
     public List<int> saveList = new List<int>();
 
     // Use this for initialization
     void Start()
     {
+        firstword = true;
         WrongCount = 0;
         CorrectCount = 0;
         WordOneC = 0;
         WordTwoC = 0;
         WordThreeC = 0;
+        wordSpeed = 10;
         do
         {
             WordOne = Random.Range(0, 10);
@@ -53,6 +56,7 @@ public class WordTest : MonoBehaviour
         saveList.Add(WordTwo);
         saveList.Add(WordThree);
 
+
     }
 
 
@@ -71,31 +75,48 @@ public class WordTest : MonoBehaviour
     {
         if (KinectDetectOutput.SkeletonIsEnable == true)
         {
-            if (WordOneC + WordTwoC + WordThreeC >= 30)
+            if (firstword == true) {
+                Invoke("WordCC", 0);
+                firstword = false;
+            }
+            if (WordOneC + WordTwoC + WordThreeC == 30)
             {
 
             }
             else
             {
-                if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 40)
+                if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 80)
                 {
+                    wordSpeed = 10;
                     if (!IsInvoking("WordCC"))
                     {
-                        Invoke("WordCC", 2.4f);
+                        Invoke("WordCC", 4f);
                     }
                 }
-                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 20)
+                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 65)
                 {
+                    wordSpeed = 12;
                     if (!IsInvoking("WordCC"))
                     {
-                        Invoke("WordCC", 1.8f);
+                        Invoke("WordCC", 3.5f);
+                    }
+                }
+                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 45)
+                {
+                    wordSpeed = 15;
+
+                    if (!IsInvoking("WordCC"))
+                    {
+                        Invoke("WordCC", 3);
                     }
                 }
                 else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 0)
                 {
+                    wordSpeed = 18;
+
                     if (!IsInvoking("WordCC"))
                     {
-                        Invoke("WordCC", 1.2f);
+                        Invoke("WordCC", 2.5f);
                     }
                 }
 

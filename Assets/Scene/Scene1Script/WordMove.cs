@@ -12,6 +12,10 @@ public class WordMove : MonoBehaviour
     public GameObject WordCreat002;
     private WordTest WTest002;
 
+    int W_WordSpeed;
+    public GameObject W_Timecount;
+    private TimeTest W_timetest;
+
     public testWordObj testWordChild;
     // Use this for initialization
     void Start()
@@ -20,6 +24,10 @@ public class WordMove : MonoBehaviour
 
         WordCreat002 = GameObject.Find("WordCreat");
         WTest002 = WordCreat002.GetComponent<WordTest>();
+
+
+        W_Timecount = GameObject.Find("TimeCount");
+        W_timetest = W_Timecount.GetComponent<TimeTest>();
 
         ControlBridge = GameObject.Find("控制橋");
         controlbar01 = ControlBridge.GetComponent<ControlBar>();
@@ -106,12 +114,14 @@ public class WordMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        W_WordSpeed = WTest002.wordSpeed;
+
         if (KinectDetectOutput.SkeletonIsEnable == true)
         {
             if (wordStatus == 1)
             {
                 this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-                this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 0);
+                this.gameObject.transform.Translate(W_WordSpeed * Time.deltaTime, 0, 0);
             }
             else if (wordStatus == 2)
             {
@@ -127,7 +137,7 @@ public class WordMove : MonoBehaviour
                 {
                     this.gameObject.transform.eulerAngles = new Vector3(0, 0, 30);
                 }
-                this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 0);
+                this.gameObject.transform.Translate(W_WordSpeed * Time.deltaTime, 0, 0);
             }
             else if (wordStatus == 3)
             {
@@ -143,12 +153,12 @@ public class WordMove : MonoBehaviour
                 {
                     this.gameObject.transform.eulerAngles = new Vector3(0, 0, -30);
                 }
-                this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 0);
+                this.gameObject.transform.Translate(W_WordSpeed * Time.deltaTime, 0, 0);
 
             }
             else if (wordStatus == 4)
             {
-                this.gameObject.transform.Translate(20 * Time.deltaTime, 0, 150 * Time.deltaTime);
+                this.gameObject.transform.Translate(W_WordSpeed * Time.deltaTime, 0, 150 * Time.deltaTime);
                 this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x - 0.8f * Time.deltaTime,
                     this.gameObject.transform.localScale.y - 0.8f * Time.deltaTime, this.gameObject.transform.localScale.z - 0.8f * Time.deltaTime);
             }

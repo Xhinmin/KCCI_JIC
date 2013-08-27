@@ -30,7 +30,7 @@ public class TimeTest : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        f_GameTime = 66;
+        f_GameTime = 96;
         intheGame = false;
     }
 
@@ -71,21 +71,21 @@ public class TimeTest : MonoBehaviour
                 GUI.Label(new Rect(Screen.width * GSWup / GSWdown, Screen.height * GSHup / GSHdown, GWordW, GWordH), "TIME  OUT", StartCount);
                 TimeCounter.fontSize = Screen.height * TWordH / TWordW;
             }
-            else if (f_GameTime <= 60)
+            else if (f_GameTime <= 90)
             {
                 GUI.Label(new Rect(Screen.width * TSWup / TSWdown, Screen.height * TSHup / TSHdown, TWordW, TWordH), Mathf.Floor(f_GameTime).ToString("00"), TimeCounter);
                 TimeCounter.fontSize = Screen.height * TWordH / TWordW;
 
                 G_WordCreat.SetActive(true);
             }
-            else if (f_GameTime <= 61)
+            else if (f_GameTime <= 91)
             {
                 GUI.Label(new Rect(Screen.width * GSWup / GSWdown, Screen.height * GSHup / GSHdown, GWordW, GWordH), "    START  ", StartCount);
                 StartCount.fontSize = Screen.height * GWordH / GWordW;
             }
-            else if (f_GameTime <= 64)
+            else if (f_GameTime <= 94)
             {
-                GUI.Label(new Rect(Screen.width * SWup / SWdown, Screen.height * SHup / SHdown, WordW, WordH), Mathf.Floor((f_GameTime - 60)).ToString("0"), StartCount);
+                GUI.Label(new Rect(Screen.width * SWup / SWdown, Screen.height * SHup / SHdown, WordW, WordH), Mathf.Floor((f_GameTime - 90)).ToString("0"), StartCount);
                 StartCount.fontSize = Screen.height * WordH / WordW;
             }
         }
@@ -130,6 +130,6 @@ public class TimeTest : MonoBehaviour
         }
         else if (KinectDetectOutput.SkeletonIsEnable == false)
             NoBodyDetect.SetActive(true);
-  //      }
-    }
+        }
+  //  }
 }
