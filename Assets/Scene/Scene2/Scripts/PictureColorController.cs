@@ -86,6 +86,8 @@ public class PictureColorController : MonoBehaviour
                         "onupdate", "ColorChangeUpdate",
                         "oncomplete", "ColorChangeComplete"
                         ));
+                    if (!this.audio.isPlaying)
+                        this.audio.Play();
                 }
             }
             else
@@ -99,6 +101,8 @@ public class PictureColorController : MonoBehaviour
                     "onupdate", "ColorChangeUpdate",
                     "oncomplete", "ColorChangeComplete"
                     ));
+                if (!this.audio.isPlaying)
+                    this.audio.Play();
             }
         }
     }
