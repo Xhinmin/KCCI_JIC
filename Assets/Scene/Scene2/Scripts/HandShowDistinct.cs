@@ -61,10 +61,18 @@ public class HandShowDistinct : MonoBehaviour
 
 
         //偵測到骨架時 將手的圖顯示出來
+
         if (KinectDetectOutput.SkeletonIsEnable)
+        {
+            this.transform.GetChild(1).gameObject.SetActive(true);
             this.transform.GetChild(0).gameObject.SetActive(true);
+        }
         else
+        {
+            this.transform.GetChild(1).gameObject.SetActive(false);
             this.transform.GetChild(0).gameObject.SetActive(false);
+        }
+
 
     }
 
