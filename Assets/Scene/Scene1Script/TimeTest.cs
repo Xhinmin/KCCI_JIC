@@ -68,7 +68,7 @@ public class TimeTest : MonoBehaviour
             else if (f_GameTime <= 0)
             {
                 GUI.Label(new Rect(Screen.width * TSWup / TSWdown, Screen.height * TSHup / TSHdown, TWordW, TWordH), "00", TimeCounter);
-                GUI.Label(new Rect(Screen.width * GSWup / GSWdown, Screen.height * GSHup / GSHdown, GWordW, GWordH), "TIME  OUT", StartCount);
+                GUI.Label(new Rect(Screen.width * GSWup / GSWdown, Screen.height * GSHup / GSHdown, GWordW, GWordH), "時間到", StartCount);
                 TimeCounter.fontSize = Screen.height * TWordH / TWordW;
             }
             else if (f_GameTime <= 90)
@@ -80,7 +80,7 @@ public class TimeTest : MonoBehaviour
             }
             else if (f_GameTime <= 91)
             {
-                GUI.Label(new Rect(Screen.width * GSWup / GSWdown, Screen.height * GSHup / GSHdown, GWordW, GWordH), "    START  ", StartCount);
+                GUI.Label(new Rect(Screen.width * GSWup / GSWdown, Screen.height * GSHup / GSHdown, GWordW, GWordH), "開始", StartCount);
                 StartCount.fontSize = Screen.height * GWordH / GWordW;
             }
             else if (f_GameTime <= 94)
