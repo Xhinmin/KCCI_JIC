@@ -24,6 +24,8 @@ public class TimeTest : MonoBehaviour
 
     public bool AllWord = false;
 
+    public AudioSource CountDownAudio, StartAudio, TimeUpAudio, BGAudio;
+    int AudioCount = 0;
     
     //  private List<int> saveList = new List<int>();
 
@@ -70,23 +72,53 @@ public class TimeTest : MonoBehaviour
                 GUI.Label(new Rect(Screen.width * TSWup / TSWdown, Screen.height * TSHup / TSHdown, TWordW, TWordH), "00", TimeCounter);
                 GUI.Label(new Rect(Screen.width * GSWup / GSWdown, Screen.height * GSHup / GSHdown, GWordW, GWordH), "時間到", StartCount);
                 TimeCounter.fontSize = Screen.height * TWordH / TWordW;
+                if (AudioCount == 5)
+                {
+                    TimeUpAudio.Play();
+                    AudioCount++;
+                }
             }
             else if (f_GameTime <= 90)
             {
                 GUI.Label(new Rect(Screen.width * TSWup / TSWdown, Screen.height * TSHup / TSHdown, TWordW, TWordH), Mathf.Floor(f_GameTime).ToString("00"), TimeCounter);
                 TimeCounter.fontSize = Screen.height * TWordH / TWordW;
-
+                if (AudioCount == 4)
+                {
+                    BGAudio.Play();
+                    AudioCount++;
+                }
                 G_WordCreat.SetActive(true);
             }
             else if (f_GameTime <= 91)
             {
                 GUI.Label(new Rect(Screen.width * GSWup / GSWdown, Screen.height * GSHup / GSHdown, GWordW, GWordH), "開始", StartCount);
                 StartCount.fontSize = Screen.height * GWordH / GWordW;
+                if ( AudioCount == 3)
+                {
+                    StartAudio.Play();
+                    AudioCount++;
+                }
             }
             else if (f_GameTime <= 94)
             {
                 GUI.Label(new Rect(Screen.width * SWup / SWdown, Screen.height * SHup / SHdown, WordW, WordH), Mathf.Floor((f_GameTime - 90)).ToString("0"), StartCount);
                 StartCount.fontSize = Screen.height * WordH / WordW;
+                if (f_GameTime < 94 && AudioCount == 0)
+                {
+                    CountDownAudio.Play();
+                    AudioCount++;
+                }
+                else if (f_GameTime < 93 && AudioCount == 1)
+                {
+                    CountDownAudio.Play();
+                    AudioCount++;
+                }
+                else if (f_GameTime < 92 && AudioCount == 2)
+                {
+                    CountDownAudio.Play();
+                    AudioCount++;
+                }
+                
             }
         }
 
@@ -103,8 +135,9 @@ public class TimeTest : MonoBehaviour
    //     }
    //     else
    //     {
-        if (KinectDetectOutput.SkeletonIsEnable == true)
-        {
+   //     if (KinectDetectOutput.SkeletonIsEnable == true)
+  //      {
+        
             NoBodyDetect.SetActive(false);
             intheGame = true;
             ReLoadGame = 0;
@@ -121,15 +154,15 @@ public class TimeTest : MonoBehaviour
             if (f_GameTime <= -13)
                 Application.LoadLevel("Scene1");
         }
-        else if (KinectDetectOutput.SkeletonIsEnable == false && intheGame == true)
-        {
-            NoBodyDetect.SetActive(true);
-            ReLoadGame += Time.deltaTime;
-            if (ReLoadGame >= 10)
-                Application.LoadLevel("Scene1");
-        }
-        else if (KinectDetectOutput.SkeletonIsEnable == false)
-            NoBodyDetect.SetActive(true);
-        }
+   //     else if (KinectDetectOutput.SkeletonIsEnable == false && intheGame == true)
+   //     {
+   //         NoBodyDetect.SetActive(true);
+   //         ReLoadGame += Time.deltaTime;
+  //          if (ReLoadGame >= 10)
+  //              Application.LoadLevel("Scene1");
+  //      }
+  //      else if (KinectDetectOutput.SkeletonIsEnable == false)
+  //          NoBodyDetect.SetActive(true);
+  //      }
   //  }
 }

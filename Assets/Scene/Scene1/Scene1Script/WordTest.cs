@@ -18,6 +18,7 @@ public class WordTest : MonoBehaviour
     public int WrongCount;                      //計算答錯次數
     public int wordSpeed;                       // 字的移動速度
     bool firstword;
+    public int AllWordCount;                           //計算總共出了幾個字
 
     public List<int> saveList = new List<int>();
 
@@ -31,6 +32,7 @@ public class WordTest : MonoBehaviour
         WordTwoC = 0;
         WordThreeC = 0;
         wordSpeed = 10;
+        AllWordCount = 0;
         do
         {
             WordOne = Random.Range(0, 10);
@@ -52,9 +54,9 @@ public class WordTest : MonoBehaviour
         Instantiate(G_Word[WordThree], G_WordGoalPic[2].transform.position, G_Word[WordThree].transform.rotation);
         GameObject.Find("Exit03").GetComponent<ExitNumber>().ExitNum = WordThree;
 
-        saveList.Add(WordOne);
-        saveList.Add(WordTwo);
-        saveList.Add(WordThree);
+   //     saveList.Add(WordOne);
+    //    saveList.Add(WordTwo);
+    //    saveList.Add(WordThree);
 
 
     }
@@ -63,8 +65,8 @@ public class WordTest : MonoBehaviour
 
     void WordCC()
     {
-        print("Ecount" + EWordOneC + " " + EWordTwoC + " " + EWordThreeC + "\n");
-        print(CorrectCount);
+        AllWordCount++;
+
         int j = Random.Range(0, 3);
 
         Instantiate(G_WordPlane, G_WordEntrance[j].transform.position, G_WordPlane.transform.rotation);
@@ -73,17 +75,13 @@ public class WordTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (KinectDetectOutput.SkeletonIsEnable == true)
-        {
+    //    if (KinectDetectOutput.SkeletonIsEnable == true)
+    //    {
             if (firstword == true) {
                 Invoke("WordCC", 0);
                 firstword = false;
             }
-            if (WordOneC + WordTwoC + WordThreeC == 30)
-            {
-
-            }
-            else
+            if (AllWordCount < 30)
             {
                 if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 80)
                 {
@@ -119,8 +117,8 @@ public class WordTest : MonoBehaviour
                         Invoke("WordCC", 2.5f);
                     }
                 }
-
             }
-        }
+          
+   //     }
     }
 }
