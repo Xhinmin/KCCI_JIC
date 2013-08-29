@@ -28,11 +28,11 @@ public class SkeletonInformation : MonoBehaviour
 	// Use this for initialization
 	void Start () {
         skeletonWrapper = GameObject.Find("Kinect_Prefab").GetComponent<SkeletonWrapper>();
+        Screen.showCursor = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
         HandRightPos = skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight];
         HandLeftPos = skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft];
         AnkleLeftPos = skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.AnkleLeft];
@@ -57,6 +57,8 @@ public class SkeletonInformation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
+
+        
 
     }
 }
