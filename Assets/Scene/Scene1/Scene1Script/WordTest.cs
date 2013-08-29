@@ -83,38 +83,38 @@ public class WordTest : MonoBehaviour
             }
             if (AllWordCount < 30)
             {
-                if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 80)
+                if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 75)
                 {
                     wordSpeed = 10;
+                    if (!IsInvoking("WordCC"))
+                    {
+                        Invoke("WordCC", 5f);
+                    }
+                }
+                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 55)
+                {
+                    wordSpeed = 11;
+                    if (!IsInvoking("WordCC"))
+                    {
+                        Invoke("WordCC", 4.5f);
+                    }
+                }
+                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 30)
+                {
+                    wordSpeed = 12;
+
                     if (!IsInvoking("WordCC"))
                     {
                         Invoke("WordCC", 4f);
                     }
                 }
-                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 65)
+                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 0)
                 {
-                    wordSpeed = 12;
+                    wordSpeed = 13;
+
                     if (!IsInvoking("WordCC"))
                     {
                         Invoke("WordCC", 3.5f);
-                    }
-                }
-                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 45)
-                {
-                    wordSpeed = 15;
-
-                    if (!IsInvoking("WordCC"))
-                    {
-                        Invoke("WordCC", 3);
-                    }
-                }
-                else if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 0)
-                {
-                    wordSpeed = 18;
-
-                    if (!IsInvoking("WordCC"))
-                    {
-                        Invoke("WordCC", 2.5f);
                     }
                 }
             }
