@@ -35,14 +35,14 @@ public class HandShowDistinct : MonoBehaviour
         {
             this.transform.localPosition = this.OrginalLocalPosition + new Vector3(
                 Mathf.Clamp(KinectDetectOutput.RightHandPosition.x * handRatio + skeletonInformation.HipCenterPos.x * hipRatio, X_Min, X_Max),
-                Mathf.Clamp(KinectDetectOutput.RightHandPosition.y * handRatio + skeletonInformation.HipCenterPos.x * hipRatio, Y_Min, Y_Max),
+                Mathf.Clamp(KinectDetectOutput.RightHandPosition.y * handRatio, Y_Min, Y_Max),
                 0);
         }
         else
         {
             this.transform.localPosition = this.OrginalLocalPosition + new Vector3(
                 Mathf.Clamp(KinectDetectOutput.LeftHandPosition.x * handRatio + skeletonInformation.HipCenterPos.x * hipRatio, X_Min, X_Max),
-                Mathf.Clamp(KinectDetectOutput.LeftHandPosition.y * handRatio + skeletonInformation.HipCenterPos.x * hipRatio, Y_Min, Y_Max),
+                Mathf.Clamp(KinectDetectOutput.LeftHandPosition.y * handRatio, Y_Min, Y_Max),
                 0);
         }
 

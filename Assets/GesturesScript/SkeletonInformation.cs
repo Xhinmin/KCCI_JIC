@@ -55,6 +55,8 @@ public class SkeletonInformation : MonoBehaviour
         WristLeftPos = skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.WristLeft];
         WristRightPos = skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.WristRight];
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
 
     }
 }
