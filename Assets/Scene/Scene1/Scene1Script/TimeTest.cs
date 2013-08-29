@@ -11,14 +11,14 @@ public class TimeTest : MonoBehaviour
     public float ReLoadGame;
 
     public float f_GameTime, AllWordTime;
-    public GUIStyle StartCount, TimeCounter, EndGuiSC, EndGuiSW;
+    public GUIStyle StartCount, TimeCounter, EndGuiSC;
 
     public int SWdown, SWup, SHdown, SHup, WordW, WordH;
     public int GSWdown, GSWup, GSHdown, GSHup, GWordW, GWordH;
     public float TSWdown, TSWup, TSHdown, TSHup, TWordW, TWordH;
 
     public int CorrectSWdown, CorrectSWup, CorrectSHdown, CorrectSHup, CorrectWordW, CorrectWordH;
-    public int WrongSWdown, WrongSWup, WrongSHdown, WrongSHup, WrongWordW, WrongWordH;
+
 
     public GameObject G_WordCreat;
 
@@ -59,12 +59,9 @@ public class TimeTest : MonoBehaviour
                 TimeCounter.fontSize = (int)(Screen.height * TWordH / TWordW);
 
                 GUI.Label(new Rect(Screen.width * CorrectSWup / CorrectSWdown,
-                    Screen.height * CorrectSHup / CorrectSHdown, CorrectWordW, CorrectWordH), "正確次數：" + G_WordCreat.GetComponent<WordTest>().CorrectCount, EndGuiSC);
+                    Screen.height * CorrectSHup / CorrectSHdown, CorrectWordW, CorrectWordH), "恭喜你完成 " + G_WordCreat.GetComponent<WordTest>().CorrectCount + " 個  部首分類", EndGuiSC);
                 EndGuiSC.fontSize = Screen.height * CorrectWordH / CorrectWordW;
 
-                GUI.Label(new Rect(Screen.width * WrongSWup / WrongSWdown,
-                    Screen.height * WrongSHup / WrongSHdown, WrongWordW, WrongWordH), "錯誤次數：" + G_WordCreat.GetComponent<WordTest>().WrongCount, EndGuiSW);
-                EndGuiSW.fontSize = Screen.height * WrongWordH / WrongWordW;
               
             }
             else if (f_GameTime <= 0)
@@ -135,8 +132,8 @@ public class TimeTest : MonoBehaviour
    //     }
    //     else
    //     {
-   //     if (KinectDetectOutput.SkeletonIsEnable == true)
-  //      {
+        if (KinectDetectOutput.SkeletonIsEnable == true)
+        {
         
             NoBodyDetect.SetActive(false);
             intheGame = true;
@@ -154,15 +151,15 @@ public class TimeTest : MonoBehaviour
             if (f_GameTime <= -13)
                 Application.LoadLevel("Scene1");
         }
-   //     else if (KinectDetectOutput.SkeletonIsEnable == false && intheGame == true)
-   //     {
-   //         NoBodyDetect.SetActive(true);
-   //         ReLoadGame += Time.deltaTime;
-  //          if (ReLoadGame >= 10)
-  //              Application.LoadLevel("Scene1");
-  //      }
-  //      else if (KinectDetectOutput.SkeletonIsEnable == false)
-  //          NoBodyDetect.SetActive(true);
-  //      }
+        else if (KinectDetectOutput.SkeletonIsEnable == false && intheGame == true)
+        {
+            NoBodyDetect.SetActive(true);
+            ReLoadGame += Time.deltaTime;
+            if (ReLoadGame >= 10)
+                Application.LoadLevel("Scene1");
+        }
+        else if (KinectDetectOutput.SkeletonIsEnable == false)
+            NoBodyDetect.SetActive(true);
+        }
   //  }
 }

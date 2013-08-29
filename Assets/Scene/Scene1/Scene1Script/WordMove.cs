@@ -116,8 +116,8 @@ public class WordMove : MonoBehaviour
     {
         W_WordSpeed = WTest002.wordSpeed;
 
-    //    if (KinectDetectOutput.SkeletonIsEnable == true)
-    //    {
+        if (KinectDetectOutput.SkeletonIsEnable == true)
+        {
             if (wordStatus == 1)
             {
                 this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
@@ -162,7 +162,7 @@ public class WordMove : MonoBehaviour
                 this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x - 0.8f * Time.deltaTime,
                     this.gameObject.transform.localScale.y - 0.8f * Time.deltaTime, this.gameObject.transform.localScale.z - 0.8f * Time.deltaTime);
             }
-    //    }
+        }
 
     }
 }

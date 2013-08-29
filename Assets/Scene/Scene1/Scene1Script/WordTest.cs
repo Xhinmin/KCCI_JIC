@@ -75,13 +75,13 @@ public class WordTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    //    if (KinectDetectOutput.SkeletonIsEnable == true)
-    //    {
+        if (KinectDetectOutput.SkeletonIsEnable == true)
+        {
             if (firstword == true) {
                 Invoke("WordCC", 0);
                 firstword = false;
             }
-            if (AllWordCount < 30)
+            if (AllWordCount < 30 && GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 8)
             {
                 if (GameObject.Find("TimeCount").GetComponent<TimeTest>().f_GameTime > 75)
                 {
@@ -119,6 +119,6 @@ public class WordTest : MonoBehaviour
                 }
             }
           
-   //     }
+        }
     }
 }
