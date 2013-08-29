@@ -6,6 +6,8 @@ public class TimeTest : MonoBehaviour
 {
     public SkeletonInformation Tskeletoninfomation;
 
+    public GameObject StartPic, TimeupPic, WordCompletePic;
+
     public bool intheGame;
     public GameObject NoBodyDetect;
     public float ReLoadGame;
@@ -14,7 +16,7 @@ public class TimeTest : MonoBehaviour
     public GUIStyle StartCount, TimeCounter, EndGuiSC;
 
     public int SWdown, SWup, SHdown, SHup, WordW, WordH;
-    public int GSWdown, GSWup, GSHdown, GSHup, GWordW, GWordH;
+    
     public float TSWdown, TSWup, TSHdown, TSHup, TWordW, TWordH;
 
     public int CorrectSWdown, CorrectSWup, CorrectSHdown, CorrectSHup, CorrectWordW, CorrectWordH;
@@ -58,8 +60,11 @@ public class TimeTest : MonoBehaviour
                 GUI.Label(new Rect(Screen.width * TSWup / TSWdown, Screen.height * TSHup / TSHdown, TWordW, TWordH), "00", TimeCounter);
                 TimeCounter.fontSize = (int)(Screen.height * TWordH / TWordW);
 
+                TimeupPic.SetActive(false);
+                WordCompletePic.SetActive(true);
+
                 GUI.Label(new Rect(Screen.width * CorrectSWup / CorrectSWdown,
-                    Screen.height * CorrectSHup / CorrectSHdown, CorrectWordW, CorrectWordH), "恭喜你完成 " + G_WordCreat.GetComponent<WordTest>().CorrectCount + " 個  部首分類", EndGuiSC);
+                    Screen.height * CorrectSHup / CorrectSHdown, CorrectWordW, CorrectWordH),  G_WordCreat.GetComponent<WordTest>().CorrectCount.ToString() , EndGuiSC);
                 EndGuiSC.fontSize = Screen.height * CorrectWordH / CorrectWordW;
 
               
@@ -67,8 +72,7 @@ public class TimeTest : MonoBehaviour
             else if (f_GameTime <= 0)
             {
                 GUI.Label(new Rect(Screen.width * TSWup / TSWdown, Screen.height * TSHup / TSHdown, TWordW, TWordH), "00", TimeCounter);
-                GUI.Label(new Rect(Screen.width * GSWup / GSWdown, Screen.height * GSHup / GSHdown, GWordW, GWordH), "時間到", StartCount);
-                TimeCounter.fontSize = (int)(Screen.height * TWordH / TWordW);
+                TimeupPic.SetActive(true);
                 if (AudioCount == 5)
                 {
                     TimeUpAudio.Play();
@@ -77,6 +81,7 @@ public class TimeTest : MonoBehaviour
             }
             else if (f_GameTime <= 90)
             {
+                StartPic.SetActive(false);
                 GUI.Label(new Rect(Screen.width * TSWup / TSWdown, Screen.height * TSHup / TSHdown, TWordW, TWordH), Mathf.Floor(f_GameTime).ToString("00"), TimeCounter);
                 TimeCounter.fontSize = (int)(Screen.height * TWordH / TWordW);
                 if (AudioCount == 4)
@@ -88,8 +93,8 @@ public class TimeTest : MonoBehaviour
             }
             else if (f_GameTime <= 91)
             {
-                GUI.Label(new Rect(Screen.width * GSWup / GSWdown, Screen.height * GSHup / GSHdown, GWordW, GWordH), "開始", StartCount);
-                StartCount.fontSize = Screen.height * GWordH / GWordW;
+                StartPic.SetActive(true);
+            
                 if ( AudioCount == 3)
                 {
                     StartAudio.Play();
