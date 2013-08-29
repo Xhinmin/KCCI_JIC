@@ -181,6 +181,6 @@ public class PictureColorController : MonoBehaviour
             this.IncreasePictureAlpha();
         }
 
-        print("Current Picture Name：" + this.SpriteList[this.currentIndex].name + " ,Current Alpha = " + this.SpriteList[this.currentIndex].color.a);
+       // print("Current Picture Name：" + this.SpriteList[this.currentIndex].name + " ,Current Alpha = " + this.SpriteList[this.currentIndex].color.a);
     }
 }

@@ -63,7 +63,7 @@ public class KinectDetectOutput : MonoBehaviour
         //偵測骨架部分 第一個玩家
         if (GameObject.Find("Kinect_Prefab").GetComponent<SkeletonWrapper>().trackedPlayers[0] == -1)
         {
-            SkeletonIsEnable = false;
+            SkeletonIsEnable = true;
         }
         else
             SkeletonIsEnable = true;
